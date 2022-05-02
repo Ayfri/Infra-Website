@@ -15,9 +15,9 @@
 					<a href="#scope">Cadre du projet</a>
 					
 					<ol class="summary-sublist">
-						<li class="summary-subtitle"><a href="#scope">Présentation du projet</a></li>
-						<li class="summary-subtitle"><a href="#scope">Contexte du projet</a></li>
-						<li class="summary-subtitle"><a href="#scope">Contraintes du projet</a></li>
+						<li class="summary-subtitle"><a href="#scope-intro">Présentation du projet</a></li>
+						<li class="summary-subtitle"><a href="#scope-context">Contexte du projet</a></li>
+						<li class="summary-subtitle"><a href="#scope-constrains">Contraintes du projet</a></li>
 					</ol>
 				</li>
 				
@@ -39,12 +39,12 @@
 					</ol>
 				</li>
 				<li class="summary-title">
-					<a href="#pfsence">PFSence</a>
+					<a href="#pfsense">PFSense</a>
 					
 					<ol class="summary-sublist">
-						<li class="summary-subtitle"><a href="#pfsence-install">Installation</a></li>
-						<li class="summary-subtitle"><a href="#pfsence-config">Configuration</a></li>
-						<li class="summary-subtitle"><a href="#pfsence-network">Configuration du réseau</a></li>
+						<li class="summary-subtitle"><a href="#pfsense-install">Installation</a></li>
+						<li class="summary-subtitle"><a href="#pfsense-config">Configuration</a></li>
+						<li class="summary-subtitle"><a href="#pfsense-network">Configuration du réseau</a></li>
 					</ol>
 				</li>
 				<li class="summary-title">
@@ -72,7 +72,7 @@
 					
 					<ol class="summary-sublist">
 						<li class="summary-subtitle"><a href="#deploy-config-vms">Configuration machines</a></li>
-						<li class="summary-subtitle"><a href="#deploy-rules">Règles PFSence</a></li>
+						<li class="summary-subtitle"><a href="#deploy-rules">Règles PFSense</a></li>
 					</ol>
 				</li>
 				
@@ -81,11 +81,54 @@
 					
 					<ol class="summary-sublist">
 					</ol>
+				</li>
 			</ol>
 			
 			<hr>
 			
 			<div id="content">
+				<h2 id="scope">Cadre du projet</h2>
+				<div class="section">
+					<h3 id="scope-intro">Présentation du projet</h3>
+					<div class="group">
+						<p>
+							Déploiement d’un système d’information et d’un réseau pour une petite entreprise pour l’aider à communiquer et envoyer des données
+							plus facilement. Cette structure permettra aux personnels un système pratique et le site aidera à se documenter sur la nouvelle
+							infrastructure plus rapidement.<br>
+							<br>
+							L’infrastructure sera composée d’un parefeu PFSense, deux clients (Windows et Linux), un serveur web Linux, un serveur de backup
+							Linux.<br>
+							<br>
+							L’accès au serveur linux de sauvegarde peut se faire seulement via le réseau interne de la société (soit les deux clients et le
+							serveur web).<br>
+							<br>
+							L’accès au site web peut se faire du réseau internet ou externe.
+						</p>
+					</div>
+					
+					<h3 id="scope-context">Contexte du projet</h3>
+					<div class="group">
+						<p>
+							Le projet a été entrepris dans un cadre universitaire dont le sujet était de créer un réseau local d’une entreprise et mettre en
+							ligne un site web en utilisant divers langages et outils de notre choix (VMWare, PFSense, NginX, HTML, CSS)<br>
+							<br>
+							Durant la phase de recherche, l'idée de créer un site regroupant les informations nécessaires à la création et l’organisation du
+							projet nous paraissait important. Les utilisateurs pourront donc se documenter plus facilement.<br>
+						</p>
+					</div>
+					
+					<h3 id="scope-constrains">Contraintes du projet</h3>
+					<div class="group">
+						<p>
+							Le projet se devait de respecter quelques points primordiaux. Tout d’abord les informations nécessaires à la création entière du
+							réseau devraient se trouver sur le site. Ces informations devront être concises et précises pour ne pas déstabiliser l’utilisateur.<br>
+							<br>
+							De plus, en tant que projet dans un cadre universitaire, la durée définie pour livrer le projet est limitée. Nous devons donc avoir
+							un rythme de travail régulier et autonome, ainsi qu’un programme précis.<br>
+						</p>
+					</div>
+				</div>
+				
 				<h2 id="machines">Machines</h2>
 				<div class="section">
 					<h3 id="machines-create">Création</h3>
@@ -170,7 +213,7 @@
 						
 						<div class="note">
 							<strong>Note :</strong><br>
-							Le PFSence doit être configuré en mode <code>NAT</code> du côté du LAN.
+							Le PFSense doit être configuré en mode <code>NAT</code> du côté du LAN.
 						</div>
 					</div>
 				</div>
@@ -317,124 +360,123 @@
 					</div>
 				</div>
 				
-				<h2 id="pfsence">PFSence</h2>
+				<h2 id="pfsense">PFSense</h2>
 				<div class="section">
-					<h3 id="pfsence-install">Installation</h3>
+					<h3 id="pfsense-install">Installation</h3>
 					<div class="group">
 						<p>
-							PFSence est un outil de surveillance de la sécurité du réseau. Il permet de surveiller les connexions et les déconnexions des
+							PFSense est un outil de surveillance de la sécurité du réseau. Il permet de surveiller les connexions et les déconnexions des
 							utilisateurs.<br>
-							Pour l'installer, il suffit de télécharger un ISO sur le site de la communauté de PFSence, puis de l'installer sur le serveur :<br>
-							<br>
+							Pour l'installer, il suffit de télécharger un ISO sur le site de la communauté de PFSense, puis de l'installer sur le serveur :<br>
 						</p>
 						
 						<figure>
-							<img src="../resources/pfsence-install-1.png" alt="Installation pfsence 1">
+							<img src="../resources/pfsense-install-1.png" alt="Installation pfsense 1">
 							<figcaption>
-								Création d'une machine virtuelle avec l'ISO de PFSence.
+								Création d'une machine virtuelle avec l'ISO de PFSense.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-install-2.png" alt="Installation pfsence 2">
+							<img src="../resources/pfsense-install-2.png" alt="Installation pfsense 2">
 							<figcaption>
-								L'installation ne requiert pas d'autres étapes, une fois lancée PFSence est
+								L'installation ne requiert pas d'autres étapes, une fois lancée PFSense est
 							</figcaption>
 						</figure>
 					</div>
 					
-					<h3 id="pfsence-config">Configuration</h3>
+					<h3 id="pfsense-config">Configuration</h3>
 					<div class="group">
 						<p>
-							Une fois PFSence installé, il faut le configurer.
+							Une fois PFSense installé, il faut le configurer.
 						</p>
 						
 						<figure>
-							<img src="../resources/pfsence-config-1.png" alt="Configuration pfsence 1">
+							<img src="../resources/pfsense-config-1.png" alt="Configuration pfsense 1">
 							<figcaption>
 								Une fois le copyright accepté, un menu d'installation est disponible.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-2.png" alt="Configuration pfsence 2">
+							<img src="../resources/pfsense-config-2.png" alt="Configuration pfsense 2">
 							<figcaption>
-								PFSence demande de choisir un clavier et un groupe de raccourcis à utiliser, nous utilisons celui de base.
+								PFSense demande de choisir un clavier et un groupe de raccourcis à utiliser, nous utilisons celui de base.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-3.png" alt="Configuration pfsence 3">
+							<img src="../resources/pfsense-config-3.png" alt="Configuration pfsense 3">
 							<figcaption>
 								Configuration des partitions du disque dur.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-4.png" alt="Configuration pfsence 4">
+							<img src="../resources/pfsense-config-4.png" alt="Configuration pfsense 4">
 							<figcaption>
 								Validation de la configuration à installer.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-5.png" alt="Configuration pfsence 5">
+							<img src="../resources/pfsense-config-5.png" alt="Configuration pfsense 5">
 							<figcaption>
-								PFSence demande de choisir un type d'utilisation de disque dur à plusieurs partitions, nous utilisons le type de disque dur par
+								PFSense demande de choisir un type d'utilisation de disque dur à plusieurs partitions, nous utilisons le type de disque dur par
 								défaut.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-6.png" alt="Configuration pfsence 6">
+							<img src="../resources/pfsense-config-6.png" alt="Configuration pfsense 6">
 							<figcaption>
 								Validation de la configuration du disque dur.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-7.png" alt="Configuration pfsence 7">
+							<img src="../resources/pfsense-config-7.png" alt="Configuration pfsense 7">
 							<figcaption>
 								La machine demande de formater les partitions, il faut appuyer sur <code>*</code> pour les sélectionner toutes.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-8.png" alt="Configuration pfsence 8">
+							<img src="../resources/pfsense-config-8.png" alt="Configuration pfsense 8">
 							<figcaption>
-								PFSence s'installe après le formatage des partitions.
+								PFSense s'installe après le formatage des partitions.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-9.png" alt="Configuration pfsence 9">
+							<img src="../resources/pfsense-config-9.png" alt="Configuration pfsense 9">
 							<figcaption>
-								Une fois l'installation terminée, PFSence nous propose d'ouvrir un terminal pour finaliser notre installation.<br>
+								Une fois l'installation terminée, PFSense nous propose d'ouvrir un terminal pour finaliser notre installation.<br>
 								Le projet n'a pas besoin d'autre configuration.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-config-10.png" alt="Configuration pfsence 10">
+							<img src="../resources/pfsense-config-10.png" alt="Configuration pfsense 10">
 							<figcaption>
-								PFSence est maintenant configuré et avertis qu'il va redémarrer.
+								PFSense est maintenant configuré et avertis qu'il va redémarrer.
 							</figcaption>
 						</figure>
 					</div>
 					
-					<h3 id="pfsence-network">Configuration du réseau</h3>
+					<h3 id="pfsense-network">Configuration du réseau</h3>
 					<div class="group">
 						<figure>
-							<img src="../resources/pfsence-network-1.png" alt="Configuration du réseau pfsence 1">
+							<img src="../resources/pfsense-network-1.png" alt="Configuration du réseau pfsense 1">
 							<figcaption>
-								PFSence demande de configurer l'adresse IP statique.
+								Le terminal de PFSense, l'adresse IP est générée automatiquement.
 							</figcaption>
 						</figure>
 						
 						<figure>
-							<img src="../resources/pfsence-network-2.png" alt="Configuration du réseau pfsence 2">
+							<img src="../resources/pfsense-network-2.png" alt="Configuration du réseau pfsense 2">
 							<figcaption>
-								Une fois fait, PFSence créé un site local via son adresse IP pour pouvoir configurer des règles.<br>
+								Une fois fait, PFSense créé un site local via son adresse IP pour pouvoir configurer des règles.<br>
 								Il faut se connecter au site pour pouvoir configurer les règles.
 							</figcaption>
 						</figure>
@@ -442,32 +484,32 @@
 							<p>
 								<strong>Note :</strong><br>
 								Le pare-feu va bloquer le rafraîchissement de notre page donc taper la commande <code>pfctl -d</code> dans le terminal du
-								PfSense, qui va
-								désactiver le pare-feu pour nous permettre d’affecter nos changements.
-							
+								PfSense, qui va désactiver le pare-feu pour nous permettre d’affecter nos changements.
 							</p>
-							<img src="../resources/pfsence-network-3.png" alt="Configuration du réseau pfsence 3">
+							<img src="../resources/pfsense-network-3.png" alt="Configuration du réseau pfsense 3">
 						</div>
 						
-						<h4>Les règles PFSence :</h4>
+						<h4>Les règles PFSense :</h4>
 						<figure>
-							<img src="../resources/pfsence-network-4.png" alt="Configuration du réseau pfsence 4">
+							<img src="../resources/pfsense-network-4.png" alt="Configuration du réseau pfsense 4">
 							<figcaption>
-								Nous pouvons maintenant ajouter une règle de PFSence.
+								Nous pouvons maintenant ajouter une règle de PFSense.
 							</figcaption>
 						</figure>
 						
-						<p>Définition de la règle pour ouvrir le port 80.</p>
-						<img src="../resources/pfsence-network-5.png" alt="Configuration du réseau pfsence 5">
-						<img src="../resources/pfsence-network-6.png" alt="Configuration du réseau pfsence 5">
-						<img src="../resources/pfsence-network-7.png" alt="Configuration du réseau pfsence 5">
+						<p>
+							Définition de la règle pour ouvrir le port 80.
+						</p>
+						<img src="../resources/pfsense-network-5.png" alt="Configuration du réseau pfsense 5">
+						<img src="../resources/pfsense-network-6.png" alt="Configuration du réseau pfsense 5">
+						<img src="../resources/pfsense-network-7.png" alt="Configuration du réseau pfsense 5">
 						
 						<p>
 							Une fois la règle créée, nous pouvons tester si elle est bien active.
 						</p>
 						
 						<figure>
-							<img src="../resources/pfsence-network-8.png" alt="Configuration du réseau pfsence 8">
+							<img src="../resources/pfsense-network-8.png" alt="Configuration du réseau pfsense 8">
 							<figcaption>
 								Le ping fonctionne, la règle est bien active.
 							</figcaption>
@@ -668,22 +710,22 @@
 						<figure>
 							<img src="../resources/deploy-config-1.png" alt="Configuration deploy 1">
 							<figcaption>
-								Le PFSence doit être mis en mode <code>Bridged</code>.
+								Le PFSense doit être mis en mode <code>Bridged</code>.
 							</figcaption>
 						</figure>
 						
 						<figure>
 							<img src="../resources/deploy-config-2.png" alt="Configuration deploy 2">
 							<figcaption>
-								Connexion du PFSence au partage de connexion.
+								Connexion du PFSense au partage de connexion.
 							</figcaption>
 						</figure>
 					</div>
 					
-					<h3 id="deploy-rules">Configuration de règles pour PFSence</h3>
+					<h3 id="deploy-rules">Configuration de règles pour PFSense</h3>
 					<div class="group">
 						<p>
-							Le PFSence doit avoir une nouvelle règle pour pouvoir autoriser les connexions entrantes à se connecter en mode <code>bridged</code>.<br>
+							Le PFSense doit avoir une nouvelle règle pour pouvoir autoriser les connexions entrantes à se connecter en mode <code>bridged</code>.<br>
 						</p>
 						
 						<figure>
@@ -691,7 +733,7 @@
 							<img src="../resources/deploy-rules-2.png" alt="Configuration deploy 3">
 							<img src="../resources/deploy-rules-3.png" alt="Configuration deploy 3">
 							<figcaption>
-								Création de la règle PFSence.
+								Création de la règle PFSense.
 							</figcaption>
 						</figure>
 						
