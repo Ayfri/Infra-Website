@@ -2,6 +2,7 @@
 :root {
 	--navbar-background: hsl(220, 12%, 18%);
 	--note-background: hsl(220, 7%, 20%);
+	--navbar-btn-hover: hsl(220, 8%, 24%);
 	--link-color: hsl(216, 97%, 71%);
 	--subtitle-color: hsl(140, 4%, 90%);
 	--text-color: hsl(140, 3%, 78%);
@@ -9,9 +10,10 @@
 	--text-hover-color: hsl(140, 3%, 99%);
 	--horizontal-line: hsl(220, 7%, 25%);
 	--background-main: hsl(210, 6%, 12%);
+	--box-shadow: hsl(220, 5%, 8%);
+	--navbar-summary-hover-background: hsl(220, 12%, 15%);
 	--go-to-top-color: hsl(220, 7%, 30%);
 	--go-to-top-color-hover: hsl(220, 7%, 40%);
-	--navbar-btn-hover: hsl(220, 8%, 24%);
 
 	--go-to-top-size: max(4vw, 2.7rem);
 }
@@ -186,8 +188,8 @@ pre code {
 .navbar h1 {
 	color: var(--title-color);
 	font-size: 1.8rem;
-	padding: 10px;
 	font-weight: 750;
+	padding: 10px;
 }
 
 .navbar .btn {
@@ -205,6 +207,80 @@ pre code {
 .navbar .btn:hover {
 	background-color: var(--navbar-btn-hover);
 	color: var(--title-color);
+}
+
+.navbar .navbar-menu-btn {
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.navbar .navbar-menu-btn:hover {
+	cursor: pointer;
+}
+
+.navbar-menu {
+	background-color: var(--navbar-background);
+	border-radius: 0 0 10px 10px;
+	left: 43vw;
+	position: absolute;
+	top: 100%;
+}
+
+.navbar-menu .summary-sublist {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem 1rem;
+}
+
+.navbar-menu .summary-title, .navbar-menu .summary-subtitle {
+	display: flex;
+	margin: 0;
+}
+
+.navbar-menu .summary-title a, .navbar-menu .summary-subtitle a {
+	padding: 1rem;
+	width: 100%;
+}
+
+.navbar-menu .summary-title:hover, .navbar-menu .summary-subtitle:hover {
+	background-color: var(--navbar-summary-hover-background);
+}
+
+.navbar-menu .summary-title:last-child {
+	border-radius: 0 0 10px 10px;
+}
+
+.navbar-menu .summary-subtitle:last-child {
+	border-radius: 0 0 10px 10px;
+}
+
+.navbar-menu .summary-subtitle:first-child {
+	border-radius: 0 10px 0 0;
+}
+
+.navbar-menu .summary-title a:hover, .navbar-menu .summary-subtitle a:hover {
+	padding-left: 1rem;
+}
+
+.navbar-menu .summary-sublist {
+	display: none;
+}
+
+.navbar-menu .summary-title:hover .summary-sublist {
+	background-color: var(--navbar-background);
+	display: flex;
+	margin-left: 100%;
+	margin-top: 0;
+	padding: 0;
+	position: absolute;
+}
+
+.navbar-menu .summary-title:hover .summary-sublist {
+	border-radius: 0 10px 10px 10px;
+}
+
+.navbar-menu .summary-title:before, .navbar-menu .summary-subtitle:before {
+	content: "";
 }
 
 /* Summary */
@@ -303,7 +379,7 @@ li:before {
 	font-size: 0.9em;
 }
 
-#go-to-top.show {
+#go-to-top {
 	bottom: 20px;
 }
 
@@ -312,10 +388,6 @@ li:before {
 }
 
 /* Utils */
-.show {
-	opacity: 1;
-}
-
 .hide {
 	opacity: 0;
 }
