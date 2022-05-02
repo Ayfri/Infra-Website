@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Infra</title>
+		<link href="index.css" rel="stylesheet">
+		<script crossorigin="anonymous" src="https://kit.fontawesome.com/74fed0e2b5.js"></script>
+		<script defer src="go-to-top.js"></script>
+	</head>
+	<body>
+		<nav class="navbar">
+			<h1><a href="index.html">Projet Infra</a></h1>
+			
+			<p class="navbar-menu-btn">Sommaire</p>
+			
+			<ul class="navbar-menu hide-navbar">
+			
+			</ul>
+			<a class="btn" download="Rendu.pdf" href="../resources/Rendu.pdf">Télécharger rendu</a>
+		</nav>
+		<div id="page">
+			<h1 id="summary-title">Sommaire</h1>
+			<ol id="summary-list">
+				<li class="summary-title">
+					<a href="#scope">Cadre du projet</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#scope-intro">Présentation du projet</a></li>
+						<li class="summary-subtitle"><a href="#scope-context">Contexte du projet</a></li>
+						<li class="summary-subtitle"><a href="#scope-constrains">Contraintes du projet</a></li>
+					</ol>
+				</li>
+				
+				<li class="summary-title">
+					<a href="#machines">Machines</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#machines-create">Création</a></li>
+						<li class="summary-subtitle"><a href="#machines-network">Configuration du réseau</a></li>
+					</ol>
+				</li>
+				
+				<li class="summary-title">
+					<a href="#plan"> Plan d'adressage</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#plan-config">Configuration</a></li>
+						<li class="summary-subtitle"><a href="#plan-adresses">Adresses</a></li>
+					</ol>
+				</li>
+				<li class="summary-title">
+					<a href="#pfsense">PFSense</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#pfsense-install">Installation</a></li>
+						<li class="summary-subtitle"><a href="#pfsense-config">Configuration</a></li>
+						<li class="summary-subtitle"><a href="#pfsense-network">Configuration du réseau</a></li>
+					</ol>
+				</li>
+				<li class="summary-title">
+					<a href="#backup">Backup</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#backup-install">Installation de RSync</a></li>
+						<li class="summary-subtitle"><a href="#backup-config">Configuration</a></li>
+						<li class="summary-subtitle"><a href="#backup-config-site">Configuration du site</a></li>
+						<li class="summary-subtitle"><a href="#backup-auto">Automatisation</a></li>
+					</ol>
+				</li>
+				<li class="summary-title">
+					<a href="#nginx">Nginx</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#nginx-install">Installation</a></li>
+						<li class="summary-subtitle"><a href="#nginx-config">Configuration</a></li>
+					</ol>
+				</li>
+				
+				<li class="summary-title">
+					<a href="#deploy">Déploiement</a>
+					
+					<ol class="summary-sublist">
+						<li class="summary-subtitle"><a href="#deploy-config-vms">Configuration machines</a></li>
+						<li class="summary-subtitle"><a href="#deploy-rules">Règles PFSense</a></li>
+					</ol>
+				</li>
+				
+				<li class="summary-title">
+					<a href="#orga">Organisation</a>
+					
+					<ol class="summary-sublist">
+					</ol>
+				</li>
+			</ol>
+			
+			<hr>
+			
+			<div id="content">
+				<h2 id="scope">Cadre du projet</h2>
+				<div class="section">
+					<h3 id="scope-intro">Présentation du projet</h3>
+					<div class="group">
+						<p>
+							Déploiement d’un système d’information et d’un réseau pour une petite entreprise pour l’aider à communiquer et envoyer des données
+							plus facilement. Cette structure permettra aux personnels un système pratique et le site aidera à se documenter sur la nouvelle
+							infrastructure plus rapidement.<br>
+							<br>
+							L’infrastructure sera composée d’un parefeu PFSense, deux clients (Windows et Linux), un serveur web Linux, un serveur de backup
+							Linux.<br>
+							<br>
+							L’accès au serveur linux de sauvegarde peut se faire seulement via le réseau interne de la société (soit les deux clients et le
+							serveur web).<br>
+							<br>
+							L’accès au site web peut se faire du réseau internet ou externe.
+						</p>
+					</div>
+					
+					<h3 id="scope-context">Contexte du projet</h3>
+					<div class="group">
+						<p>
+							Le projet a été entrepris dans un cadre universitaire dont le sujet était de créer un réseau local d’une entreprise et mettre en
+							ligne un site web en utilisant divers langages et outils de notre choix (VMWare, PFSense, NginX, HTML, CSS)<br>
+							<br>
+							Durant la phase de recherche, l'idée de créer un site regroupant les informations nécessaires à la création et l’organisation du
+							projet nous paraissait important. Les utilisateurs pourront donc se documenter plus facilement.<br>
+						</p>
+					</div>
+					
+					<h3 id="scope-constrains">Contraintes du projet</h3>
+					<div class="group">
+						<p>
+							Le projet se devait de respecter quelques points primordiaux. Tout d’abord les informations nécessaires à la création entière du
+							réseau devraient se trouver sur le site. Ces informations devront être concises et précises pour ne pas déstabiliser
+							l’utilisateur.<br>
+							<br>
+							De plus, en tant que projet dans un cadre universitaire, la durée définie pour livrer le projet est limitée. Nous devons donc avoir
+							un rythme de travail régulier et autonome, ainsi qu’un programme précis.<br>
+						</p>
+					</div>
+				</div>
+				
+				<h2 id="machines">Machines</h2>
+				<div class="section">
+					<h3 id="machines-create">Création</h3>
+					
+					<div class="group">
+						Les machines sont créées sur VMWare à la main.<br>
+						<br>
+						<strong>Exemple <i>(création du client linux)</i> :</strong><br>
+						<br>
+						
+						<figure>
+							<img alt="creation-linux-1" loading="lazy" src="creation-linux-1.png">
+							<figcaption>
+								Création d'une nouvelle machine via l'utilitaire VMWare.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="creation-linux-2" loading="lazy" src="creation-linux-2.png">
+							<figcaption>
+								Création de la machine virtuelle étape 2.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="creation-linux-3" loading="lazy" src="creation-linux-3.png">
+							<figcaption>
+								Définition de l'ISO à utiliser.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="creation-linux-4" loading="lazy" src="creation-linux-4.png">
+							<figcaption>
+								Définition du nom de la machine et de l'utilisateur root.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="creation-linux-6" loading="lazy" src="creation-linux-5.png">
+							<figcaption>
+								Définition de la location de la machine virtuelle.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="creation-linux-7" loading="lazy" src="creation-linux-6.png">
+							<figcaption>
+								Définition de la taille du disque dur.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="creation-linux-8" loading="lazy" src="creation-linux-7.png">
+							<figcaption>
+								La machine est désormais prête à utiliser.
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="machines-network">Configuration du réseau</h3>
+					<div class="group">
+						Le réseau est configuré via le gestionnaire de configuration de la machine virtuelle.<br>
+						Le mode <code>HOST-ONLY</code> est requis pour que les machines puissent communiquer entre elles.<br>
+						<br>
+						<strong>Exemple <i>(configuration du serveur linux)</i> :</strong><br>
+						<br>
+						
+						<figure>
+							<img alt="network-1" loading="lazy" src="network-1.png">
+							<figcaption>
+								Le serveur Ubuntu doit être mis en mode <code>HOST-ONLY</code>.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="network-2" loading="lazy" src="network-2.png">
+							<figcaption>
+								Configuration de ce mode dans le gestionnaire de configuration de la machine virtuelle.
+							</figcaption>
+						</figure>
+						
+						<div class="note">
+							<strong>Note :</strong><br>
+							Le PFSense doit être configuré en mode <code>NAT</code> du côté du LAN.
+						</div>
+					</div>
+				</div>
+				
+				<h2 id="plan">Plan d'adressage</h2>
+				<div class="section">
+					<h3 id="plan-config">Configuration</h3>
+					<div class="group">
+						<p>
+							La configuration du plan d'adressage est faite de différentes façons.<br>
+							<br>
+							Dans les machines Linux, il est possible de configurer une adresse IP statique dans les paramètres. <br>
+						</p>
+						<figure>
+							<img alt="configuration de l'ip du serveur linux" loading="lazy" src="config-ip-linux-1.png">
+							<figcaption>
+								Configuration de l'adresse IP statique dans les paramètres de la machine.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur linux" loading="lazy" src="config-ip-linux-2.png">
+							<figcaption>
+								Les changements sont bien pris en compte.
+							</figcaption>
+						</figure>
+						
+						<p>
+							Dans les machines Windows, il est possible de configurer une adresse IP statique dans les paramètres. <br>
+						</p>
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-1.png">
+							<figcaption>
+								Paramètres de windows.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-2.png">
+							<figcaption>
+								Paramètres de réseau avancés.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-3.png">
+							<figcaption>
+								Modification du réseau Ethernet (LAN).
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-4.png">
+							<figcaption>
+								Modification du protocole IPv4.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-5.png">
+							<figcaption>
+								Mise en place de l'adresse IP statique.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-6.png">
+							<figcaption>
+								Pour pouvoir ping le client windows, il faut activer le partage de fichiers et d'adresses ip dans les règles de sécurité.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="configuration de l'ip du serveur windows" loading="lazy" src="config-ip-windows-7.png">
+							<figcaption>
+								Les changements sont bien pris en compte.
+							</figcaption>
+						</figure>
+					
+					</div>
+					
+					<h3 id="plan-adresses">Adresses</h3>
+					<div class="group">
+						<img alt="plan d'adressage"
+						     loading="lazy"
+						     src="https://media.discordapp.net/attachments/931254585656483880/970346324090314852/unknown.png?width=925&height=668"
+						>
+						
+						<h3 id="plan-table-ip">Tableau </h3>
+						
+						<table class="ip-table">
+							<tbody>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Nom</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Adresse Ip</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">CIDR</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Default Gateway</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">VLAN</span></p></td>
+								</tr>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Client Linux</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.3</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">/29</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.6</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+								</tr>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Client Windows</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.4</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">/29</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.6</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+								</tr>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Backup</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.2</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">/29</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.6</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+								</tr>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Serveur Web</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.1</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">/29</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.6</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+								</tr>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Pare Feu Lan</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">10.0.0.6</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">/29</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+								</tr>
+								<tr class="ip-line">
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">Pare Feu Wan</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">192.168.0.10</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6"><span class="c0">/29</span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+									<td class="ip-value" colspan="1" rowspan="1"><p class="c6 c8"><span class="c0"></span></p></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<h2 id="pfsense">PFSense</h2>
+				<div class="section">
+					<h3 id="pfsense-install">Installation</h3>
+					<div class="group">
+						<p>
+							PFSense est un outil de surveillance de la sécurité du réseau. Il permet de surveiller les connexions et les déconnexions des
+							utilisateurs.<br>
+							Pour l'installer, il suffit de télécharger un ISO sur le site de la communauté de PFSense, puis de l'installer sur le serveur :<br>
+						</p>
+						
+						<figure>
+							<img alt="Installation pfsense 1" src="pfsense-install-1.png">
+							<figcaption>
+								Création d'une machine virtuelle avec l'ISO de PFSense.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation pfsense 2" src="pfsense-install-2.png">
+							<figcaption>
+								L'installation ne requiert pas d'autres étapes, une fois lancée PFSense est
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="pfsense-config">Configuration</h3>
+					<div class="group">
+						<p>
+							Une fois PFSense installé, il faut le configurer.
+						</p>
+						
+						<figure>
+							<img alt="Configuration pfsense 1" src="pfsense-config-1.png">
+							<figcaption>
+								Une fois le copyright accepté, un menu d'installation est disponible.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 2" src="pfsense-config-2.png">
+							<figcaption>
+								PFSense demande de choisir un clavier et un groupe de raccourcis à utiliser, nous utilisons celui de base.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 3" src="pfsense-config-3.png">
+							<figcaption>
+								Configuration des partitions du disque dur.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 4" src="pfsense-config-4.png">
+							<figcaption>
+								Validation de la configuration à installer.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 5" src="pfsense-config-5.png">
+							<figcaption>
+								PFSense demande de choisir un type d'utilisation de disque dur à plusieurs partitions, nous utilisons le type de disque dur par
+								défaut.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 6" src="pfsense-config-6.png">
+							<figcaption>
+								Validation de la configuration du disque dur.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 7" src="pfsense-config-7.png">
+							<figcaption>
+								La machine demande de formater les partitions, il faut appuyer sur <code>*</code> pour les sélectionner toutes.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 8" src="pfsense-config-8.png">
+							<figcaption>
+								PFSense s'installe après le formatage des partitions.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 9" src="pfsense-config-9.png">
+							<figcaption>
+								Une fois l'installation terminée, PFSense nous propose d'ouvrir un terminal pour finaliser notre installation.<br>
+								Le projet n'a pas besoin d'autre configuration.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration pfsense 10" src="pfsense-config-10.png">
+							<figcaption>
+								PFSense est maintenant configuré et avertis qu'il va redémarrer.
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="pfsense-network">Configuration du réseau</h3>
+					<div class="group">
+						<figure>
+							<img alt="Configuration du réseau pfsense 1" src="pfsense-network-1.png">
+							<figcaption>
+								Le terminal de PFSense, l'adresse IP est générée automatiquement.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration du réseau pfsense 2" src="pfsense-network-2.png">
+							<figcaption>
+								Une fois fait, PFSense créé un site local via son adresse IP pour pouvoir configurer des règles.<br>
+								Il faut se connecter au site pour pouvoir configurer les règles.
+							</figcaption>
+						</figure>
+						<div class="note">
+							<p>
+								<strong>Note :</strong><br>
+								Le pare-feu va bloquer le rafraîchissement de notre page donc taper la commande <code>pfctl -d</code> dans le terminal du
+								PfSense, qui va désactiver le pare-feu pour nous permettre d’affecter nos changements.
+							</p>
+							<img alt="Configuration du réseau pfsense 3" src="pfsense-network-3.png">
+						</div>
+						
+						<h4>Les règles PFSense :</h4>
+						<figure>
+							<img alt="Configuration du réseau pfsense 4" src="pfsense-network-4.png">
+							<figcaption>
+								Nous pouvons maintenant ajouter une règle de PFSense.
+							</figcaption>
+						</figure>
+						
+						<p>
+							Définition de la règle pour ouvrir le port 80.
+						</p>
+						<img alt="Configuration du réseau pfsense 5" src="pfsense-network-5.png">
+						<img alt="Configuration du réseau pfsense 5" src="pfsense-network-6.png">
+						<img alt="Configuration du réseau pfsense 5" src="pfsense-network-7.png">
+						
+						<p>
+							Une fois la règle créée, nous pouvons tester si elle est bien active.
+						</p>
+						
+						<figure>
+							<img alt="Configuration du réseau pfsense 8" src="pfsense-network-8.png">
+							<figcaption>
+								Le ping fonctionne, la règle est bien active.
+							</figcaption>
+						</figure>
+					
+					</div>
+				</div>
+				
+				<h2 id="backup">Backup</h2>
+				<div class="section">
+					<h3 id="backup-install">Installation</h3>
+					<div class="group">
+						<p>
+							Pour mettre en place la backup, utilisation de <code><a href="https://doc.ubuntu-fr.org/rsync">rsync</a></code>.<br>
+							<dfn>Remote synchronization ou synchronisation à distance,</dfn>c’est un logiciel de synchronisation de fichiers.<br>
+							Il est fréquemment utilisé pour mettre en place des systèmes de sauvegarde distante ou des points de restauration du système (via
+							l'interface Timeshift)<br>
+							Pour ce faire, il faut deux serveurs (ici le serveur web et la backup).
+						</p>
+						
+						<figure>
+							<img alt="Installation backup 1" src="backup-install-1.png">
+							<figcaption>
+								Installation de rsync.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation backup 2" src="backup-install-2.png">
+							<img alt="Installation backup 2" src="backup-install-3.png">
+							<figcaption>
+								Activation et lancement de rsync.
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="backup-config">Configuration</h3>
+					<div class="group">
+						<p>
+							La configuration de la backup sur le serveur backup est assez simple.<br>
+							Elle consiste en un fichier de configuration <code>/etc/rsyncd.conf</code> qui contient les informations sur le serveur distant et
+							le chemin de sauvegarde.
+						</p>
+						<figure>
+							<img alt="Installation backup 4" src="backup-install-4.png">
+							<img alt="Installation backup 5" src="backup-install-5.png">
+							<figcaption>
+								Configuration de rsync.<br>
+								<br>
+								<code>path=/home/backuo/backup</code> : Donne le chemin de destination des fichiers (lieu de stockage dans le backup).<br>
+								<code>hosts allow = 10.0.0.1</code> : IP du serveur qui envoie les informations. Le partage des informations se faisant dans un
+								réseau local, on y met donc une IP locale.<br>
+								<code>hosts deny = *</code> : Empêche l’envoi de fichiers venant de n’importe qui pour sécuriser.<br>
+								<code>list = true</code> :<br> Permet de donner au client l’ensemble des fichiers du répertoire de destination.<br>
+								<code>uid = root, gid = root</code> : Permet de lancer le daemon en tant que root.<br>
+								<code>read only = false</code> : Gestion des permissions (groupes et users).<br>
+								<br>
+								<code>sudo systemctl restart rsync</code> : Relancer le logiciel en validant la configuration.<br>
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="backup-config-site">Test</h3>
+					<div class="group">
+						<p>
+							Sur le serveur web il faut maintenant installer <code>rsync</code> et configurer un site.<br>
+							Les sites sont installés dans <code>/var/www/html</code>.<br>
+							Un script est utilisé pour lancer la sauvegarde de tous les sites.<br>
+						</p>
+						
+						<figure>
+							<img alt="Installation backup 6" src="backup-config-1.png">
+							<figcaption>
+								Création du script de sauvegarde <code>/var/www/html/<strong>Infra-Website</strong>/rsync</code>
+							</figcaption>
+						</figure>
+						
+						<div class="note">
+							<strong>Note :</strong><br>
+							Le site web est nommé <strong>Infra-Website</strong>.
+						</div>
+						
+						<figure>
+							<img alt="Installation backup 7" src="backup-config-2.png">
+							<figcaption>
+								Le script consiste en une commande :
+								<pre><code>rsync -avz /var/www/html/Infra-Website/ 10.0.0.2::backup</code></pre>
+								<br>
+								<code>/var/www/html/Infra-Website/</code> represente le fichier depuis lequel on veut “extraire” des donnes et
+								<code>10.0.0.2</code> l’IP vers laquelle
+								elles seront envoyées.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation backup 8" src="backup-config-3.png">
+							<figcaption>
+								Ne pas oublier de donner les droits d’exécution du script.
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="backup-auto">Automatisation</h3>
+					<div class="group">
+						<p>
+							Le script de backup va être lancé tous les jours grâce à un <code>crontab</code>.<br>
+						<p>
+						
+						<figure>
+							<img alt="Installation backup 9" src="backup-auto-1.png">
+							<img alt="Installation backup 9" src="backup-auto-2.png">
+							<figcaption>
+								Création du crontab.<br>
+								<br>
+								<code>sudo crontab -e</code> : Ouvre le crontab.<br>
+								<code>* * * * * /var/www/html/Infra-Website/rsync</code> : L’heure, le jour, le mois, le jour de la semaine, le répertoire et le
+								script à exécuter.<br>
+								Ici configuré sur toutes les minutes pour les tests.<br>
+								<br>
+							</figcaption>
+						</figure>
+						
+						<p>
+							Après l'exécution du script de backup une fois, nous pouvons voir les fichiers de backup.
+						</p>
+						
+						<figure>
+							<img alt="Installation backup 10" src="backup-auto-3.png">
+							<figcaption>
+								Le serveur linux.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation backup 11" src="backup-auto-4.png">
+							<figcaption>
+								Le serveur de backup, contenant bien les fichiers.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation backup 12" src="backup-auto-5.png">
+							<figcaption>
+								Les logs de <code>cron</code> indiquent bien que le script a été exécuté.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation backup 13" src="backup-auto-6.png">
+							<figcaption>
+								Ne pas oublier de changer le cron pour s'exécuter qu'une fois par jour.
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+				
+				<h2 id="nginx">Nginx</h2>
+				<div class="section">
+					<h3 id="nginx-install">Installation</h3>
+					<div class="group">
+						<p>
+							Nginx est un serveur web qui permet de gérer plusieurs sites web en même temps et leurs connexions.
+							
+							Pour installer Nginx, il faut installer le package avec la commande <code>sudo apt-get install nginx</code>.
+						</p>
+						<figure>
+							<img alt="Installation nginx 1" src="nginx-install-1.png">
+							<figcaption>
+								Installation de Nginx.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Installation nginx 2" src="nginx-install-2.png">
+							<figcaption>
+								Une fois ceci fait, le serveur sera en place et disponible en réseau local.
+								La commande <code>service nginx status</code> permet de voir si le serveur est en marche.
+							</figcaption>
+						</figure>
+						
+						<p>
+							Le site par défaut est accessible via l’URL <code>localhost</code> ou grâce à l’IP locale de la machine sur laquelle le serveur est hébergé
+							<i>(dans notre cas <code>10.0.0.1</code>)</i>.
+						</p>
+						
+						<figure>
+							<img alt="Installation nginx 3" src="nginx-install-3.png">
+							<figcaption>
+								Lorsqu’on se rend sur la page, le contenu sera donc la page HTML par défaut proposée par Nginx
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="nginx-config">Configuration</h3>
+					<div class="group">
+						<p>
+							Nginx doit maintenant être configuré pour que les sites web puissent être hébergés.
+							
+							Dans notre cas, un seul site sera configuré.
+						</p>
+						
+						<figure>
+							<img alt="Configuration nginx 1" src="nginx-config-1.png">
+							<img alt="Configuration nginx 2" src="nginx-config-2.png">
+							<figcaption>
+								Si l’on veut modifier la page par défaut, il suffit de naviguer dans le dossier où se situe la page par défaut.
+								Le fichier de cette page se trouve dans <code>/var/www/html/index.nginx-debian.html</code>.
+							</figcaption>
+						</figure>
+						
+						<p>
+							Dans notre cas, nous ne toucherons pas à ce fichier, mais modifierons la page HTML que prendra Nginx par défaut.<br>
+							Pour ce faire, il faut se rendre dans le dossier de configuration de Nginx dans <code>/etc/nginx/sites-enabled</code>
+							et créer un fichier de configuration nommé <code>default</code>.
+						</p>
+						
+						<figure>
+							<img alt="Configuration nginx 3" src="nginx-config-3.png">
+							<img alt="Configuration nginx 4" src="nginx-config-4.png">
+							<figcaption>
+								Création du fichier de configuration.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration nginx 5" src="nginx-config-5.png">
+							<figcaption>
+								Mise en place du fichier de configuration.
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+				
+				<h2 id="deploy">Déploiement</h2>
+				<div class="section">
+					<h3 id="deploy-config-vms">Configuration des machines virtuelles</h3>
+					
+					<div class="group">
+						<p>
+							Pour pouvoir accéder au site depuis le LAN, il faut configurer les machines virtuelles.<br>
+							Il faut aussi avoir un appareil disponible sur le réseau, nous allons utiliser un téléphone portable connecté à internet faisant un
+							partage de connexion et se connecter à ce réseau.<br>
+						</p>
+						
+						<figure>
+							<img alt="Configuration deploy 1" src="deploy-config-1.png">
+							<figcaption>
+								Le PFSense doit être mis en mode <code>Bridged</code>.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration deploy 2" src="deploy-config-2.png">
+							<figcaption>
+								Connexion du PFSense au partage de connexion.
+							</figcaption>
+						</figure>
+					</div>
+					
+					<h3 id="deploy-rules">Configuration de règles pour PFSense</h3>
+					<div class="group">
+						<p>
+							Le PFSense doit avoir une nouvelle règle pour pouvoir autoriser les connexions entrantes à se connecter en mode <code>bridged</code>.<br>
+						</p>
+						
+						<figure>
+							<img alt="Configuration deploy 3" src="deploy-rules-1.png">
+							<img alt="Configuration deploy 3" src="deploy-rules-2.png">
+							<img alt="Configuration deploy 3" src="deploy-rules-3.png">
+							<figcaption>
+								Création de la règle PFSense.
+							</figcaption>
+						</figure>
+						
+						<figure>
+							<img alt="Configuration deploy 4" src="deploy-rules-4.png">
+							<figcaption>
+								Le site peut maintenant être accessible depuis le LAN.
+							</figcaption>
+						</figure>
+					
+					</div>
+				</div>
+				
+				<h2 id="orga">Organisation</h2>
+				<div class="section">
+					<p>
+						Tout d’abord, nous avons pris quelques heures pour réaliser un brainstorming des idées primaires, nous permettant d'émettre des plans qui nous orienteront
+						plus précisément.<br>
+						<br>
+						Grâce à ces idées, de nombreux schémas du réseau ont été réalisés en mélangeant toutes les idées reçues jusqu’à en perfectionner un que nous trouvions plus
+						pratique, plus simple et plus adapté au besoin de l’entreprise.<br>
+						<br>
+						Nos idées étaient claires, nous avons commencé à suivre nos croquis pour avoir une base concrète sur laquelle travailler. De ce fait, les créations des VMs
+						ont été commencées et le réseau local a été implémenté.<br>
+						<br>
+						Nous avons ensuite pu entreprendre la réalisation de la backup, puis de la mise en ligne du serveur web.<br>
+						Une fois la globalité du système créée, nous avons pu reprendre la documentation ainsi que l'amélioration du site web.<br>
+						<br>
+						Nous avons finalement terminé par la réalisation des supports pour la présentation orale.
+					</p>
+				</div>
+				
+				<h2>Conclusion</h2>
+				<div class="section conclusion">
+					Ainsi l’infrastructure et le système d’informations sont adaptés au besoin de l‘entreprise. Le site web détaille l'implémentation de toutes les fonctionnalités
+					et peut être accessible sur d’autres PC, ce qui reste idéal pour comprendre plus efficacement le réseau mis en place.<br>
+					<br>
+					Les solutions pour l’entreprise ont donc été exposées et pourront être adaptées en fonction des nouveaux besoins de celle-ci.
+				</div>
+			</div>
+			
+			<footer class="hide-footer">
+				<div class="contacts">
+					<a href="https://github.com/Ayfri/Infra-Website"><i class="fa fa-github"></i></a>
+					<a class="vr" href="https://github.com/antaww">Antoine PIZZETTA</a>
+					<a class="vr" href="https://github.com/xhmyjae">Margot TOMATIS</a>
+					<a class="vr" href="https://github.com/ayfri">Pierre ROY</a>
+				</div>
+				<hr>
+				
+				<div class="licence">
+					<p>
+						Projet Infra
+					</p>
+					<a href="https://www.gnu.org/licenses/gpl-3.0.html">
+						© GNU General Public License v3.0
+					</a>
+				</div>
+			</footer>
+			
+			<div class="hide" id="go-to-top">
+				<i class="fa fa-arrow-up"></i>
+			</div>
+		</div>
+	</body>
+</html>
